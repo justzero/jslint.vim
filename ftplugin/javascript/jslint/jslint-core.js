@@ -354,9 +354,9 @@ var JSLINT = (function () {
             rhino     : true,
             undef     : true,
             unparam   : true,
-            sloppy    : true,
+            sloppy    : false,
             sub       : true,
-            vars      : true,
+            vars      : false,
             white     : true,
             widget    : true,
             windows   : true
@@ -398,7 +398,7 @@ var JSLINT = (function () {
             'history', 'Image', 'localStorage', 'location', 'name', 'navigator',
             'Option', 'parent', 'screen', 'sessionStorage', 'setInterval',
             'setTimeout', 'Storage', 'window', 'XMLHttpRequest'
-        ], false),
+        ], true),
 
 // bundle contains the text messages.
 
@@ -1237,7 +1237,7 @@ var JSLINT = (function () {
                 } else if (!option.nomen &&
                         (value.charAt(0) === '_' ||
                         value.charAt(value.length - 1) === '_')) {
-                    warn_at('dangling_a', line, from, value);
+                    //warn_at('dangling_a', line, from, value);
                 }
             }
             if (type === '(number)') {
@@ -2990,10 +2990,10 @@ klass:              do {
         if (next_token.id === '{') {
             advance('{');
             step_in();
-            if (!ordinary && !use_strict() && !old_strict_mode &&
-                    !option.sloppy && funct['(context)'] === global_funct) {
-                warn('missing_use_strict');
-            }
+            //if (!ordinary && !use_strict() && !old_strict_mode &&
+                    //!option.sloppy && funct['(context)'] === global_funct) {
+                //warn('missing_use_strict');
+            //}
             array = statements();
             strict_mode = old_strict_mode;
             step_out('}', curly);
@@ -3057,7 +3057,7 @@ klass:              do {
 
                 } else {
                     if (!option.undef) {
-                        warn('used_before_a', token);
+                        //warn('used_before_a', token);
                     }
                     scope[name] = variable = {
                         string: name,
@@ -3774,7 +3774,7 @@ klass:              do {
                         warn('adsafe_a');
                     } else if (id.charAt(0) === '_' ||
                             id.charAt(id.length - 1) === '_') {
-                        warn('dangling_a');
+                        //warn('dangling_a');
                     }
                 }
                 advance();
@@ -3983,11 +3983,11 @@ klass:              do {
 
         var assign, id, name;
 
-        if (funct['(vars)'] && !option.vars) {
-            warn('combine_var');
-        } else if (funct !== global_funct) {
-            funct['(vars)'] = true;
-        }
+        //if (funct['(vars)'] && !option.vars) {
+            //warn('combine_var');
+        //} else if (funct !== global_funct) {
+            //funct['(vars)'] = true;
+        //}
         this.arity = 'statement';
         this.first = [];
         step_in('var');
